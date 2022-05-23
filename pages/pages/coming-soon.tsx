@@ -1,10 +1,9 @@
-import { NextPage } from 'next';
 import Countdown from 'react-countdown';
 
-import { rendererOne } from '~/components/features/count-down';
-import ALink from '~/components/features/alink';
+import { rendererOne } from '~/components/features/CountDown';
+import ALink from '~/components/features/Alink';
 
-const ComingSoon: NextPage = () => {
+const ComingSoon = () => {
     return (
         <div className="soon">
             <div className="container">

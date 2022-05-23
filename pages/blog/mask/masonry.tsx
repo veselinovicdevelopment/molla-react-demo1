@@ -1,9 +1,8 @@
 import { useQuery } from '@apollo/client';
-import { useRef } from 'react';
 
-import ALink from '~/components/features/alink';
-import PageHeader from '~/components/features/page-header';
-import PostThree from '~/components/features/posts/post-three';
+import ALink from '~/components/features/Alink';
+import PageHeader from '~/components/features/PageHeader';
+import PostThree from '~/components/features/posts/PostThree';
 
 import { GET_POSTS_BY_PAGE } from '~/server/queries';
 import { Post } from '~/utils/types';
@@ -12,7 +11,6 @@ const BlogMaskMasonry = () => {
     const { data, loading, error } = useQuery(GET_POSTS_BY_PAGE, {
         variables: { page: 'mask-masonry' },
     });
-    const ref = useRef();
     const posts: Post[] = data && data.postsByPage.data;
 
     const getPostCategory = (post: Post) => {
@@ -106,7 +104,7 @@ const BlogMaskMasonry = () => {
                                     </p>
                                 </div>
                             ) : (
-                                <div className="row" ref={ref}>
+                                <div className="row">
                                     {posts.map((post, index) => (
                                         <div
                                             className={`col-sm-6 col-md-4 grid-item${getPostCategory(

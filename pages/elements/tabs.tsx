@@ -1,11 +1,10 @@
-import { NextPage } from 'next';
 import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
 
-import ALink from '~/components/features/alink';
-import PageHeader from '~/components/features/page-header';
-import ElementList from '~/components/partials/elements/element-list';
+import ALink from '~/components/features/Alink';
+import PageHeader from '~/components/features/PageHeader';
+import ElementList from '~/components/partials/elements/ElementList';
 
-const ElementTabs: NextPage = () => {
+const ElementTabs = () => {
     return (
         <div className="main">
             <PageHeader title="Tabs" subTitle="Elements" />

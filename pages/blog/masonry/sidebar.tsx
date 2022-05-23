@@ -1,13 +1,13 @@
 import { useRouter } from 'next/router';
 import { useLazyQuery } from '@apollo/client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import StickyBox from 'react-sticky-box';
 
-import ALink from '~/components/features/alink';
-import PageHeader from '~/components/features/page-header';
-import PostOne from '~/components/features/posts/post-one';
-import BlogSidebar from '~/components/partials/blog/sidebar/blog-sidebar';
+import ALink from '~/components/features/Alink';
+import PageHeader from '~/components/features/PageHeader';
+import PostOne from '~/components/features/posts/PostOne';
+import BlogSidebar from '~/components/partials/blog/sidebar/BlogSidebar';
 
 import { GET_POSTS_BY_PAGE } from '~/server/queries';
 import { Post } from '~/utils/types';
@@ -20,7 +20,6 @@ const BlogMasonrySidebar = () => {
     const [toggle, setToggle] = useState(false);
     const posts: Post[] = data && data.postsByPage.data;
     const categories = data && data.postsByPage.categories;
-    const ref = useRef();
 
     useEffect(() => {
         getPosts({
@@ -41,29 +40,29 @@ const BlogMasonrySidebar = () => {
     }, []);
 
     const resizeHandle = () => {
-        if (document.querySelector('body').offsetWidth < 992) setToggle(true);
+        if (document.querySelector('body')!.offsetWidth < 992) setToggle(true);
         else setToggle(false);
     };
 
     const toggleSidebar = () => {
         if (
             document
-                .querySelector('body')
+                .querySelector('body')!
                 .classList.contains('sidebar-filter-active')
         ) {
             document
-                .querySelector('body')
+                .querySelector('body')!
                 .classList.remove('sidebar-filter-active');
         } else {
             document
-                .querySelector('body')
+                .querySelector('body')!
                 .classList.add('sidebar-filter-active');
         }
     };
 
     const hideSidebar = () => {
         document
-            .querySelector('body')
+            .querySelector('body')!
             .classList.remove('sidebar-filter-active');
     };
 
@@ -116,7 +115,7 @@ const BlogMasonrySidebar = () => {
                                             </p>
                                         </div>
                                     ) : (
-                                        <div className="row" ref={ref}>
+                                        <div className="row">
                                             {posts.map((post, index) => (
                                                 <div
                                                     className={`col-sm-6 grid-item`}

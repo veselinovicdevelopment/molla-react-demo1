@@ -1,16 +1,15 @@
-import { NextPage } from 'next';
 import { useQuery } from '@apollo/client';
 
-import ALink from '~/components/features/alink';
-import PageHeader from '~/components/features/page-header';
-import ElementList from '~/components/partials/elements/element-list';
-import PostOne from '~/components/features/posts/post-one';
-import PostTwo from '~/components/features/posts/post-two';
-import PostThree from '~/components/features/posts/post-three';
+import ALink from '~/components/features/Alink';
+import PageHeader from '~/components/features/PageHeader';
+import ElementList from '~/components/partials/elements/ElementList';
+import PostOne from '~/components/features/posts/PostOne';
+import PostTwo from '~/components/features/posts/PostTwo';
+import PostThree from '~/components/features/posts/PostThree';
 
 import { GET_ELEMENT_POSTS } from '~/server/queries';
 
-const BlogPosts: NextPage = () => {
+const BlogPosts = () => {
     const { data, loading, error } = useQuery(GET_ELEMENT_POSTS);
     const posts = data && data.elementPosts;
 

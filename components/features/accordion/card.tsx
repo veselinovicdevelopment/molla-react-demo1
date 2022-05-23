@@ -1,10 +1,10 @@
 import React, { ReactNode } from 'react';
-import SlideToggle from 'react-slide-toggle';
+import useCollapse from 'react-collapsed';
 
 import { safeContent } from '~/utils';
 
 interface CardProps {
-    title?: string;
+    title: string;
     expanded?: boolean;
     adClass?: string;
     type?: string;
@@ -13,44 +13,43 @@ interface CardProps {
 
 const Card = (props: CardProps) => {
     const { title, expanded, adClass = '', type = 'default' } = props;
+    const { getCollapseProps, getToggleProps, isExpanded } = useCollapse({
+        defaultExpanded: expanded ? true : false,
+    });
 
     return 'default' === type ? (
-        <SlideToggle collapsed={expanded ? false : true}>
-            {({ onToggle, setCollapsibleElement, toggleState }) => (
-                <div className={`card ${adClass}`}>
-                    <div className="card-header" onClick={onToggle}>
-                        <h2 className="card-title">
-                            <span
-                                className={`toggle-button ${toggleState.toLowerCase()}`}
-                                dangerouslySetInnerHTML={safeContent(title)}
-                                style={{ height: 'auto' }}
-                            ></span>
-                        </h2>
-                    </div>
-                    <div ref={setCollapsibleElement}>
-                        <div className="card-body">{props.children}</div>
-                    </div>
-                </div>
-            )}
-        </SlideToggle>
+        <div className={`card ${adClass}`}>
+            <div className="card-header" {...getToggleProps()}>
+                <h2 className="card-title">
+                    <span
+                        className={`toggle-button ${
+                            isExpanded ? 'expanded' : 'collapsed'
+                        }`}
+                        dangerouslySetInnerHTML={safeContent(title)}
+                        style={{ height: 'auto' }}
+                    ></span>
+                </h2>
+            </div>
+            <div {...getCollapseProps()}>
+                <div className="card-body">{props.children}</div>
+            </div>
+        </div>
     ) : (
-        <SlideToggle collapsed={expanded ? false : true}>
-            {({ onToggle, setCollapsibleElement, toggleState }) => (
-                <div className={`acc-item ${adClass}`}>
-                    <h5>
-                        <span
-                            className={`toggle-button ${toggleState.toLowerCase()}`}
-                            dangerouslySetInnerHTML={safeContent(title)}
-                            onClick={onToggle}
-                            style={{ height: 'auto' }}
-                        ></span>
-                    </h5>
-                    <div ref={setCollapsibleElement}>
-                        <div className="collapse-wrap">{props.children}</div>
-                    </div>
-                </div>
-            )}
-        </SlideToggle>
+        <div className={`acc-item ${adClass}`}>
+            <h5>
+                <span
+                    className={`toggle-button ${
+                        isExpanded ? 'expanded' : 'collapsed'
+                    }`}
+                    dangerouslySetInnerHTML={safeContent(title)}
+                    {...getToggleProps()}
+                    style={{ height: 'auto' }}
+                ></span>
+            </h5>
+            <div {...getCollapseProps()}>
+                <div className="collapse-wrap">{props.children}</div>
+            </div>
+        </div>
     );
 };
 

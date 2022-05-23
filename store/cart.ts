@@ -32,15 +32,15 @@ const cartReducer = (state = initialState, action: CartAction): CartState => {
     switch (action.type) {
         case actionTypes.addToCart:
             var findIndex = state.data.findIndex(
-                (item) => item.id == action.payload.product.id
+                (item) => item.id == action.payload.product!.id
             );
             let qty = action.payload.qty ? action.payload.qty : 1;
             if (
                 findIndex !== -1 &&
-                action.payload.product.variants.length > 0
+                action.payload.product!.variants!.length > 0
             ) {
                 findIndex = state.data.findIndex(
-                    (item) => item.name == action.payload.product.name
+                    (item) => item.name == action.payload.product!.name
                 );
             }
 
@@ -53,9 +53,9 @@ const cartReducer = (state = initialState, action: CartAction): CartState => {
                                     ...product,
                                     qty: product.qty + qty,
                                     sum:
-                                        (action.payload.product.sale_price
-                                            ? action.payload.product.sale_price
-                                            : action.payload.product.price) *
+                                        (action.payload.product!.sale_price
+                                            ? action.payload.product!.sale_price
+                                            : action.payload.product!.price) *
                                         (product.qty + qty),
                                 });
                             } else {
@@ -63,7 +63,7 @@ const cartReducer = (state = initialState, action: CartAction): CartState => {
                             }
 
                             return acc;
-                        }, []),
+                        }, [] as CartItem[]),
                     ],
                 };
             } else {
@@ -73,24 +73,24 @@ const cartReducer = (state = initialState, action: CartAction): CartState => {
                         {
                             ...action.payload.product,
                             qty: qty,
-                            price: action.payload.product.sale_price
-                                ? action.payload.product.sale_price
-                                : action.payload.product.price,
+                            price: action.payload.product!.sale_price
+                                ? action.payload.product!.sale_price
+                                : action.payload.product!.price,
                             sum:
                                 qty *
-                                (action.payload.product.sale_price
-                                    ? action.payload.product.sale_price
-                                    : action.payload.product.price),
+                                (action.payload.product!.sale_price
+                                    ? action.payload.product!.sale_price
+                                    : action.payload.product!.price),
                         },
-                    ],
+                    ] as CartItem[],
                 };
             }
         case actionTypes.removeFromCart:
             return {
                 data: [
                     ...state.data.filter((item) => {
-                        if (item.id !== action.payload.product.id) return true;
-                        if (item.name !== action.payload.product.name)
+                        if (item.id !== action.payload.product!.id) return true;
+                        if (item.name !== action.payload.product!.name)
                             return true;
                         return false;
                     }),
@@ -99,7 +99,7 @@ const cartReducer = (state = initialState, action: CartAction): CartState => {
 
         case actionTypes.updateCart:
             return {
-                data: [...action.payload.cartItems],
+                data: [...action.payload.cartItems!],
             };
         case actionTypes.refreshStore:
             return initialState;

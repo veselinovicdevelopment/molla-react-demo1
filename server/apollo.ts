@@ -14,7 +14,7 @@ let apolloClient: ApolloClient<NormalizedCacheObject>;
 
 function createApolloClient() {
     return new ApolloClient({
-        ssrMode: true,
+        ssrMode: typeof window === 'undefined',
         link: new HttpLink({
             uri: process.env.NEXT_PUBLIC_SERVER_URL + '/graphql', // Server URL (must be absolute)
             credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
@@ -58,16 +58,17 @@ export function initializeApollo(initialState = null) {
 
 export function addApolloState(
     client: { cache: { extract: () => any } },
-    pageProps: { props: { [x: string]: any } }
+    pageProps: { props: any }
 ) {
     if (pageProps?.props) {
         pageProps.props[APOLLO_STATE_PROP_NAME] = client.cache.extract();
+        console.log('client cache', client.cache.extract());
     }
 
     return pageProps;
 }
 
-export function useApollo(pageProps: { [x: string]: any }) {
+export function useApollo(pageProps: any) {
     const state = pageProps[APOLLO_STATE_PROP_NAME];
     const store = useMemo(() => initializeApollo(state), [state]);
     return store;

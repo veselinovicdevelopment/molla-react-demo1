@@ -1,11 +1,10 @@
-import { NextPage } from 'next';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-import ALink from '~/components/features/alink';
-import PageHeader from '~/components/features/page-header';
-import ElementList from '~/components/partials/elements/element-list';
+import ALink from '~/components/features/Alink';
+import PageHeader from '~/components/features/PageHeader';
+import ElementList from '~/components/partials/elements/ElementList';
 
-const Banners: NextPage = () => {
+const Banners = () => {
     return (
         <div className="main">
             <PageHeader title="Banners" subTitle="Elements" />

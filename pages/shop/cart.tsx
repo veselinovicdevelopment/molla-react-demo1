@@ -1,10 +1,9 @@
-import { NextPage } from 'next';
 import React, { useState, useEffect, MouseEvent } from 'react';
 import { connect } from 'react-redux';
 
-import ALink from '~/components/features/alink';
-import Qty from '~/components/features/qty';
-import PageHeader from '~/components/features/page-header';
+import ALink from '~/components/features/Alink';
+import Qty from '~/components/features/Qty';
+import PageHeader from '~/components/features/PageHeader';
 
 import { actions as cartAction } from '~/store/cart';
 import { cartPriceTotal } from '~/utils/index';
@@ -17,7 +16,7 @@ interface CartProps {
 }
 
 const Cart = (props: CartProps) => {
-    const [cartList, setCartList] = useState([]);
+    const [cartList, setCartList] = useState<CartItem[]>([]);
     const [shippingCost, setShippingCost] = useState(0);
 
     useEffect(() => {
@@ -47,14 +46,14 @@ const Cart = (props: CartProps) => {
     const updateCart = (e: MouseEvent<HTMLButtonElement>) => {
         let button = e.currentTarget;
         button
-            .querySelector('.icon-refresh')
-            .classList.add('load-more-rotating');
+            ?.querySelector('.icon-refresh')
+            ?.classList.add('load-more-rotating');
 
         setTimeout(() => {
             props.updateCart(cartList);
             button
-                .querySelector('.icon-refresh')
-                .classList.remove('load-more-rotating');
+                ?.querySelector('.icon-refresh')
+                ?.classList.remove('load-more-rotating');
         }, 400);
     };
 
@@ -110,7 +109,7 @@ const Cart = (props: CartProps) => {
                                                                                 src={
                                                                                     process
                                                                                         .env
-                                                                                        .NEXT_PUBLIC_ASSET_URI +
+                                                                                        .NEXT_PUBLIC_ASSET_URI! +
                                                                                     item
                                                                                         .sm_pictures[0]
                                                                                         .url

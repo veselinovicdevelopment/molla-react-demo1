@@ -1,7 +1,6 @@
-import { NextPage } from 'next';
-import ElementList from '~/components/partials/elements/element-list';
+import ElementList from '~/components/partials/elements/ElementList';
 
-const Elements: NextPage = () => {
+const Elements = () => {
     return (
         <main className="main pt-3">
             <ElementList />

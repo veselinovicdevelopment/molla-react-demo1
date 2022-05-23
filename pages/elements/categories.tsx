@@ -1,10 +1,9 @@
-import { NextPage } from 'next';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import ALink from '~/components/features/alink';
-import PageHeader from '~/components/features/page-header';
-import ElementList from '~/components/partials/elements/element-list';
+import ALink from '~/components/features/Alink';
+import PageHeader from '~/components/features/PageHeader';
+import ElementList from '~/components/partials/elements/ElementList';
 
 const sliderSetting = {
     nav: false,
@@ -27,7 +26,7 @@ const sliderSetting = {
     },
 };
 
-const Categories: NextPage = () => {
+const Categories = () => {
     return (
         <div className="main">
             <PageHeader title="Product Category" subTitle="Elements" />

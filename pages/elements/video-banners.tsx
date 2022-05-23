@@ -1,11 +1,10 @@
-import { NextPage } from 'next';
 import { MouseEvent } from 'react';
 import { connect } from 'react-redux';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-import ALink from '~/components/features/alink';
-import PageHeader from '~/components/features/page-header';
-import ElementList from '~/components/partials/elements/element-list';
+import ALink from '~/components/features/Alink';
+import PageHeader from '~/components/features/PageHeader';
+import ElementList from '~/components/partials/elements/ElementList';
 
 import { actions } from '~/store/demo';
 
@@ -13,7 +12,7 @@ interface VideoBannersProps {
     showVideo: () => void;
 }
 
-const VideoBanners: NextPage = (props: VideoBannersProps) => {
+const VideoBanners = (props: VideoBannersProps) => {
     const openVideoModal = (e: MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
         props.showVideo();

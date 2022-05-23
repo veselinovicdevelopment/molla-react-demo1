@@ -1,17 +1,16 @@
-import { NextPage } from 'next';
 import StickyBox from 'react-sticky-box';
 import { useRouter } from 'next/router';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import ALink from '~/components/features/alink';
-import PageHeader from '~/components/features/page-header';
+import ALink from '~/components/features/Alink';
+import PageHeader from '~/components/features/PageHeader';
 
-import ShopListTwo from '~/components/partials/shop/list/shop-list-two';
-import Pagination from '~/components/features/pagination';
-import ShopSidebarThree from '~/components/partials/shop/sidebar/shop-sidebar-three';
+import ShopListTwo from '~/components/partials/shop/list/ShopListTwo';
+import Pagination from '~/components/features/Pagination';
+import ShopSidebarThree from '~/components/partials/shop/sidebar/ShopSidebarThree';
 
 import { GET_PRODUCTS } from '~/server/queries';
 import { homeData } from '~/utils/data';
@@ -50,7 +49,7 @@ const ShopMarket = () => {
     }, []);
 
     const resizeHandle = () => {
-        if (document.querySelector('body').offsetWidth < 992) setToggle(true);
+        if (document.querySelector('body')!.offsetWidth < 992) setToggle(true);
         else setToggle(false);
     };
 
@@ -61,8 +60,8 @@ const ShopMarket = () => {
                 color: query.color ? query.color.split(',') : [],
                 size: query.size ? query.size.split(',') : [],
                 brand: query.brand ? query.brand.split(',') : [],
-                minPrice: parseInt(query.minPrice),
-                maxPrice: parseInt(query.maxPrice),
+                minPrice: parseInt(query.minPrice as string),
+                maxPrice: parseInt(query.maxPrice as string),
                 category: query.category,
                 sortBy: query.sortBy ? query.sortBy : 'default',
                 page: query.page ? parseInt(query.page) : 1,
@@ -72,9 +71,9 @@ const ShopMarket = () => {
         });
     }, [query, perPage]);
 
-    const onSortByChange = (e) => {
+    const onSortByChange = (e: ChangeEvent<HTMLSelectElement>) => {
         let queryObject = router.query;
-        let url = router.pathname.replace('[type]', query.type) + '?';
+        let url = router.pathname.replace('[type]', query.type as string) + '?';
         for (let key in queryObject) {
             if (key !== 'type' && key !== 'sortBy') {
                 url += key + '=' + queryObject[key] + '&';
@@ -87,22 +86,22 @@ const ShopMarket = () => {
     const toggleSidebar = () => {
         if (
             document
-                .querySelector('body')
+                .querySelector('body')!
                 .classList.contains('sidebar-filter-active')
         ) {
             document
-                .querySelector('body')
+                .querySelector('body')!
                 .classList.remove('sidebar-filter-active');
         } else {
             document
-                .querySelector('body')
+                .querySelector('body')!
                 .classList.add('sidebar-filter-active');
         }
     };
 
     const hideSidebar = () => {
         document
-            .querySelector('body')
+            .querySelector('body')!
             .classList.remove('sidebar-filter-active');
     };
 

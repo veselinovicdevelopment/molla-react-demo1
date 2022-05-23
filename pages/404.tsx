@@ -1,9 +1,8 @@
-import { NextPage } from 'next';
 import React from 'react';
 
-import ALink from '~/components/features/alink';
+import ALink from '~/components/features/Alink';
 
-const ErrorPage: NextPage = () => (
+const ErrorPage = () => (
     <div className="main">
         <nav className="breadcrumb-nav border-0 mb-0">
             <div className="container">
@@ -29,7 +28,10 @@ const ErrorPage: NextPage = () => (
             <div className="container">
                 <h1 className="error-title">Error 404</h1>
 
-                <p>We are sorry, the page you've requested is not available.</p>
+                <p>
+                    We are sorry, the page you&apos;ve requested is not
+                    available.
+                </p>
                 <ALink
                     href="/"
                     className="btn btn-outline-primary-2 btn-minwidth-lg"

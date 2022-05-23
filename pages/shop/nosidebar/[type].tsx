@@ -1,12 +1,18 @@
 import { useRouter } from 'next/router';
-import { NextPage } from 'next';
-import { useState, useEffect, useLayoutEffect } from 'react';
+
+import {
+    useState,
+    useEffect,
+    useLayoutEffect,
+    ChangeEvent,
+    MouseEvent,
+} from 'react';
 import { useLazyQuery } from '@apollo/client';
 
-import ALink from '~/components/features/alink';
-import PageHeader from '~/components/features/page-header';
-import ShopListThree from '~/components/partials/shop/list/shop-list-three';
-import ShopSidebarOne from '~/components/partials/shop/sidebar/shop-sidebar-one';
+import ALink from '~/components/features/Alink';
+import PageHeader from '~/components/features/PageHeader';
+import ShopListThree from '~/components/partials/shop/list/ShopListThree';
+import ShopSidebarOne from '~/components/partials/shop/sidebar/ShopSidebarOne';
 
 import { GET_PRODUCTS } from '~/server/queries';
 import { scrollToPageContent } from '~/utils';
@@ -26,7 +32,7 @@ interface Query {
     page?: string;
 }
 
-const ShopNoSidebar: NextPage = () => {
+const ShopNoSidebar = () => {
     const router = useRouter();
     const type = router.query.type;
     const query: Query = router.query;
@@ -52,8 +58,8 @@ const ShopNoSidebar: NextPage = () => {
                 color: query.color ? query.color.split(',') : [],
                 size: query.size ? query.size.split(',') : [],
                 brand: query.brand ? query.brand.split(',') : [],
-                minPrice: parseInt(query.minPrice),
-                maxPrice: parseInt(query.maxPrice),
+                minPrice: parseInt(query.minPrice as string),
+                maxPrice: parseInt(query.maxPrice as string),
                 category: query.category,
                 sortBy: query.sortBy ? query.sortBy : 'default',
                 page: 1,
@@ -70,8 +76,8 @@ const ShopNoSidebar: NextPage = () => {
                 color: query.color ? query.color.split(',') : [],
                 size: query.size ? query.size.split(',') : [],
                 brand: query.brand ? query.brand.split(',') : [],
-                minPrice: parseInt(query.minPrice),
-                maxPrice: parseInt(query.maxPrice),
+                minPrice: parseInt(query.minPrice as string),
+                maxPrice: parseInt(query.maxPrice as string),
                 category: query.category,
                 sortBy: query.sortBy ? query.sortBy : 'default',
                 page: 1,
@@ -101,9 +107,9 @@ const ShopNoSidebar: NextPage = () => {
         }
     }, [type]);
 
-    const onSortByChange = (e) => {
+    const onSortByChange = (e: ChangeEvent<HTMLSelectElement>) => {
         let queryObject = router.query;
-        let url = router.pathname.replace('[type]', query.type) + '?';
+        let url = router.pathname.replace('[type]', query.type as string) + '?';
         for (let key in queryObject) {
             if (key !== 'type' && key !== 'sortBy') {
                 url += key + '=' + queryObject[key] + '&';
@@ -113,34 +119,34 @@ const ShopNoSidebar: NextPage = () => {
         router.push(url + 'sortBy=' + e.target.value);
     };
 
-    const showSidebar = (e) => {
+    const showSidebar = (e: MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
-        document.querySelector('body').classList.add('sidebar-filter-active');
+        document.querySelector('body')!.classList.add('sidebar-filter-active');
     };
 
     const toggleSidebar = () => {
         if (
             document
-                .querySelector('body')
+                .querySelector('body')!
                 .classList.contains('sidebar-filter-active')
         ) {
             document
-                .querySelector('body')
+                .querySelector('body')!
                 .classList.remove('sidebar-filter-active');
         } else {
             document
-                .querySelector('body')
+                .querySelector('body')!
                 .classList.add('sidebar-filter-active');
         }
     };
 
     const hideSidebar = () => {
         document
-            .querySelector('body')
+            .querySelector('body')!
             .classList.remove('sidebar-filter-active');
     };
 
-    const loadMore = (e) => {
+    const loadMore = (e: MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
         if (perPage < totalCount) {
             setMoreLoading(true);

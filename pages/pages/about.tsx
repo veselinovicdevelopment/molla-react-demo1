@@ -1,12 +1,11 @@
-import { NextPage } from 'next';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import ALink from '~/components/features/alink';
+import ALink from '~/components/features/Alink';
 
-import { homeData, mainSlider5, mainSlider9 } from '~/utils/data';
+import { homeData } from '~/utils/data';
 
-const About: NextPage = () => {
+const About = () => {
     return (
         <div className="main">
             <nav className="breadcrumb-nav border-0 mb-0">
@@ -119,8 +118,8 @@ const About: NextPage = () => {
                         <div className="col-lg-5">
                             <div className="brands-text">
                                 <h2 className="title">
-                                    The world's premium design brands in one
-                                    destination.
+                                    The world&apos;s premium design brands in
+                                    one destination.
                                 </h2>
                                 <p>
                                     Phasellus hendrerit. Pellentesque aliquet

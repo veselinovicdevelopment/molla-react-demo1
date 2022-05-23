@@ -6,7 +6,7 @@ import { Provider, useStore } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { CookiesProvider } from 'react-cookie';
 
-import Layout from '~/components/layout';
+import Layout from '~/components/Layout';
 import { wrapper } from '~/store';
 import { useApollo } from '~/server/apollo';
 
@@ -18,6 +18,7 @@ import 'swiper/css/autoplay';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css';
+import 'react-accordion-ts/src/panel.css';
 import '~/public/scss/style.scss';
 
 const WrappedApp = ({ Component, pageProps }: AppContext & AppInitialProps) => {
@@ -29,7 +30,7 @@ const WrappedApp = ({ Component, pageProps }: AppContext & AppInitialProps) => {
             process.env.NEXT_PUBLIC_DEMO
         ) {
             store.dispatch(
-                demoAction.refreshStore(process.env.NEXT_PUBLIC_DEMO)
+                demoAction.refreshStore(process.env.NEXT_PUBLIC_DEMO!)
             );
         }
     }, []);
@@ -122,14 +123,6 @@ const WrappedApp = ({ Component, pageProps }: AppContext & AppInitialProps) => {
             </Provider>
         </ApolloProvider>
     );
-};
-
-WrappedApp.getInitialProps = async ({ Component, ctx }) => {
-    let pageProps = {};
-    if (Component.getInitialProps) {
-        pageProps = await Component.getInitialProps(ctx);
-    }
-    return { pageProps };
 };
 
 export default wrapper.withRedux(WrappedApp);

@@ -1,6 +1,5 @@
-import { NextPage } from 'next';
 import GoogleMapReact from 'google-map-react';
-import ALink from '~/components/features/alink';
+import ALink from '~/components/features/Alink';
 
 interface MapComponentProps {
     lat: number;
@@ -12,7 +11,7 @@ const MapComponent = ({ text, lat, lng }: MapComponentProps) => (
     <div>{text}</div>
 );
 
-const Contact: NextPage = () => {
+const Contact = () => {
     return (
         <div className="main">
             <nav className="breadcrumb-nav border-0 mb-0">

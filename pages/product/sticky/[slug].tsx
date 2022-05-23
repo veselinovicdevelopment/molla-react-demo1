@@ -1,20 +1,18 @@
-import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import StickyBox from 'react-sticky-box';
 
 import { GET_PRODUCT } from '~/server/queries';
 
-import Breadcrumb from '~/components/partials/product/breadcrumb';
-import GallerySticky from '~/components/partials/product/gallery/gallery-sticky';
-import DetailOne from '~/components/partials/product/details/detail-one';
-import InfoThree from '~/components/partials/product/info-tabs/info-three';
-import RelatedProductsOne from '~/components/partials/product/related/related-one';
+import Breadcrumb from '~/components/partials/product/Breadcrumb';
+import GallerySticky from '~/components/partials/product/gallery/GallerySticky';
+import DetailOne from '~/components/partials/product/details/DetailOne';
+import InfoThree from '~/components/partials/product/info-tabs/InfoThree';
+import RelatedProductsOne from '~/components/partials/product/related/RelatedOne';
 import { Product } from '~/utils/types';
 
 const ProductSticky = () => {
     const slug = useRouter().query.slug;
-    if (!slug) return <div></div>;
 
     const { data, loading, error } = useQuery(GET_PRODUCT, {
         variables: { slug },
@@ -24,7 +22,7 @@ const ProductSticky = () => {
     const prev: Product = data && data.product.prev;
     const next: Product = data && data.product.next;
 
-    if (error) {
+    if (!slug || error) {
         return <div></div>;
     }
 

@@ -11,35 +11,41 @@ const Accordion = (props: AccordionProps) => {
     const ref = useRef<HTMLDivElement>(null);
 
     const onHandleClick = (e: MouseEvent<HTMLDivElement>) => {
+        const target = e.target as HTMLElement;
         if (
-            ref.current.classList.contains('toggle-button') ||
-            ref.current.querySelector('.toggle-button')
+            target.classList.contains('toggle-button') ||
+            target.querySelector('.toggle-button')
         ) {
             if (
-                ref.current.classList.contains('collapsed') ||
-                (ref.current.querySelector('.toggle-button') &&
-                    ref.current
-                        .querySelector('.toggle-button')
-                        .classList.contains('collapsed')) ||
-                ref.current.classList.contains('collapsing') ||
-                (ref.current.querySelector('.toggle-button') &&
-                    ref.current
-                        .querySelector('.toggle-button')
-                        .classList.contains('collapsing'))
+                target.classList.contains('collapsed') ||
+                target.classList.contains('collapsing')
             ) {
-                if (ref.current.querySelector('.toggle-button.expanded')) {
+                console.log('interesting');
+                if (
+                    target
+                        .closest('.accordion')
+                        ?.querySelector('.toggle-button.expanded')
+                ) {
                     (
-                        ref.current.querySelector(
-                            '.toggle-button.expanded'
-                        ) as HTMLElement
+                        target
+                            .closest('.accordion')
+                            ?.querySelector(
+                                '.toggle-button.expanded'
+                            ) as HTMLElement
                     ).click();
                 }
 
-                if (ref.current.querySelector('.toggle-button.expanding')) {
+                if (
+                    target
+                        .closest('.accordion')
+                        ?.querySelector('.toggle-button.expanding')
+                ) {
                     (
-                        ref.current.querySelector(
-                            '.toggle-button.expanding'
-                        ) as HTMLElement
+                        target
+                            .closest('.accordion')
+                            ?.querySelector(
+                                '.toggle-button.expanding'
+                            ) as HTMLElement
                     ).click();
                 }
             }

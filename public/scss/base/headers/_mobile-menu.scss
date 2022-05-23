@@ -196,14 +196,14 @@
 	outline: none;
 	transition: color 0.35s;
 
-	&::after {
+	& > span::after {
 		font-family: "molla";
 		content: '\f110';
 		display: inline-block;
 	}
 
-	&:hover,
-	&:focus {
+	& > span:hover,
+	&> span:focus {
 		color: $primary-color;
 	}
 

@@ -10,12 +10,14 @@ interface AlinkProps {
           };
     children: React.ReactNode;
     className?: string;
+    style?: any;
     onClick?: () => void;
     [x: string]: any;
 }
 
 const Alink: React.FC<AlinkProps> = ({
     href,
+    style,
     children,
     className,
     onClick,
@@ -38,7 +40,7 @@ const Alink: React.FC<AlinkProps> = ({
 
     return (
         <Link href={href} {...props}>
-            <a className={className} onClick={onClickHandler}>
+            <a className={className} onClick={onClickHandler} style={style}>
                 {children}
             </a>
         </Link>

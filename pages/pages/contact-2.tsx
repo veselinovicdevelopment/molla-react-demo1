@@ -1,8 +1,7 @@
-import { NextPage } from 'next';
 import GoogleMapReact from 'google-map-react';
 
-import ALink from '~/components/features/alink';
-import PageHeader from '~/components/features/page-header';
+import ALink from '~/components/features/Alink';
+import PageHeader from '~/components/features/PageHeader';
 
 interface MapComponentProps {
     lat: number;
@@ -14,7 +13,7 @@ const MapComponent = ({ text, lat, lng }: MapComponentProps) => (
     <div>{text}</div>
 );
 
-const Contact2: NextPage = () => {
+const Contact2 = () => {
     return (
         <div className="main">
             <PageHeader title="Contact us 2" subTitle="Pages" />

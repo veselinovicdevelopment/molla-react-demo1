@@ -3,10 +3,10 @@ import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import StickyBox from 'react-sticky-box';
 
-import ALink from '~/components/features/alink';
-import PageHeader from '~/components/features/page-header';
-import PostOne from '~/components/features/posts/post-one';
-import BlogSidebar from '~/components/partials/blog/sidebar/blog-sidebar';
+import ALink from '~/components/features/Alink';
+import PageHeader from '~/components/features/PageHeader';
+import PostOne from '~/components/features/posts/PostOne';
+import BlogSidebar from '~/components/partials/blog/sidebar/BlogSidebar';
 
 import { GET_POSTS_BY_PAGE } from '~/server/queries';
 import { scrollToPageContent } from '~/utils';
@@ -41,29 +41,29 @@ const BlogClassic = () => {
     }, []);
 
     const resizeHandle = () => {
-        if (document.querySelector('body').offsetWidth < 992) setToggle(true);
+        if (document.querySelector('body')!.offsetWidth < 992) setToggle(true);
         else setToggle(false);
     };
 
     const toggleSidebar = () => {
         if (
             document
-                .querySelector('body')
+                .querySelector('body')!
                 .classList.contains('sidebar-filter-active')
         ) {
             document
-                .querySelector('body')
+                .querySelector('body')!
                 .classList.remove('sidebar-filter-active');
         } else {
             document
-                .querySelector('body')
+                .querySelector('body')!
                 .classList.add('sidebar-filter-active');
         }
     };
 
     const hideSidebar = () => {
         document
-            .querySelector('body')
+            .querySelector('body')!
             .classList.remove('sidebar-filter-active');
     };
 

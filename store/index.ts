@@ -2,7 +2,7 @@ import { createWrapper } from 'next-redux-wrapper';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './root-saga';
 import { persistStore } from 'redux-persist';
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, Reducer } from '@reduxjs/toolkit';
 // import storage from 'redux-persist/lib/storage';
 
 // Import Reducers
@@ -16,10 +16,10 @@ const sagaMiddleware = createSagaMiddleware();
 export const makeStore = () => {
     const store = configureStore({
         reducer: {
-            cartlist: cartReducer,
-            wishlist: wishlistReducer,
-            comparelist: compareReducer,
-            demo: demoReducer,
+            cartlist: cartReducer as Reducer<any>,
+            wishlist: wishlistReducer as Reducer<any>,
+            comparelist: compareReducer as Reducer<any>,
+            demo: demoReducer as Reducer<any>,
         },
         middleware: (getDefaultMiddleware) =>
             getDefaultMiddleware({

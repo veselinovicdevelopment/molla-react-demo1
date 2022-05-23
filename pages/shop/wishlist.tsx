@@ -1,9 +1,8 @@
-import { NextPage } from 'next';
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import ALink from '~/components/features/alink';
-import PageHeader from '~/components/features/page-header';
+import ALink from '~/components/features/Alink';
+import PageHeader from '~/components/features/PageHeader';
 
 import { actions as wishlistAction } from '~/store/wishlist';
 import { actions as cartAction } from '~/store/cart';
@@ -14,20 +13,25 @@ interface WishlistProps {
     removeFromWishlist: (product: Product) => void;
     addToCart: (product: Product) => void;
 }
+
+interface WishProduct extends Product {
+    minPrice: number;
+    maxPrice: number;
+}
 const Wishlist = (props: WishlistProps) => {
-    const [wishItems, setWishItems] = useState([]);
+    const [wishItems, setWishItems] = useState<WishProduct[]>([]);
 
     useEffect(() => {
         setWishItems(
             props.wishlist.reduce((acc, product) => {
                 let max = 0;
                 let min = 999999;
-                product.variants.map((item) => {
+                product.variants?.map((item) => {
                     if (min > item.price) min = item.price;
                     if (max < item.price) max = item.price;
                 }, []);
 
-                if (product.variants.length == 0) {
+                if (product.variants!.length == 0) {
                     min = product.sale_price
                         ? product.sale_price
                         : product.price;
@@ -42,7 +46,7 @@ const Wishlist = (props: WishlistProps) => {
                         maxPrice: max,
                     },
                 ];
-            }, [])
+            }, [] as WishProduct[])
         );
     }, [props.wishlist]);
 
@@ -95,7 +99,7 @@ const Wishlist = (props: WishlistProps) => {
                                                         <img
                                                             src={
                                                                 process.env
-                                                                    .NEXT_PUBLIC_ASSET_URI +
+                                                                    .NEXT_PUBLIC_ASSET_URI! +
                                                                 product
                                                                     .sm_pictures[0]
                                                                     .url
@@ -132,7 +136,8 @@ const Wishlist = (props: WishlistProps) => {
                                                         2
                                                     )}
                                                 </div>
-                                            ) : product.variants.length == 0 ? (
+                                            ) : product.variants!.length ==
+                                              0 ? (
                                                 <div className="product-price d-inline-block mb-0">
                                                     <span className="new-price">
                                                         $
@@ -175,14 +180,14 @@ const Wishlist = (props: WishlistProps) => {
                                         </td>
                                         <td className="action-col">
                                             <div className="dropdown">
-                                                {product.variants.length > 0 ||
+                                                {product.variants!.length > 0 ||
                                                 product.stock == 0 ? (
                                                     <ALink
                                                         href={`/product/default/${product.slug}`}
                                                         className="btn btn-block btn-outline-primary-2 btn-select"
                                                     >
                                                         <i className="icon-list-alt"></i>
-                                                        {product.stock == '0'
+                                                        {product.stock == 0
                                                             ? 'read more'
                                                             : 'select'}
                                                     </ALink>

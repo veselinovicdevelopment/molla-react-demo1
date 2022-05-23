@@ -1,19 +1,17 @@
-import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 
 import { GET_PRODUCT } from '~/server/queries';
 
-import Breadcrumb from '~/components/partials/product/breadcrumb';
-import GalleryExtended from '~/components/partials/product/gallery/gallery-extended';
-import DetailThree from '~/components/partials/product/details/detail-three';
-import InfoOne from '~/components/partials/product/info-tabs/info-one';
-import RelatedProductsOne from '~/components/partials/product/related/related-one';
+import Breadcrumb from '~/components/partials/product/Breadcrumb';
+import GalleryExtended from '~/components/partials/product/gallery/GalleryExtended';
+import DetailThree from '~/components/partials/product/details/DetailThree';
+import InfoOne from '~/components/partials/product/info-tabs/InfoOne';
+import RelatedProductsOne from '~/components/partials/product/related/RelatedOne';
 import { Product } from '~/utils/types';
 
 const ProductDefault = () => {
     const slug = useRouter().query.slug;
-    if (!slug) return <div></div>;
 
     const { data, loading, error } = useQuery(GET_PRODUCT, {
         variables: { slug },
@@ -23,7 +21,7 @@ const ProductDefault = () => {
     const prev: Product = data && data.product.prev;
     const next: Product = data && data.product.next;
 
-    if (error) {
+    if (!slug || error) {
         return <div></div>;
     }
 

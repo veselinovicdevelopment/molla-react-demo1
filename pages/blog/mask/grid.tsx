@@ -2,9 +2,9 @@ import { useLazyQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-import ALink from '~/components/features/alink';
-import PageHeader from '~/components/features/page-header';
-import PostThree from '~/components/features/posts/post-three';
+import ALink from '~/components/features/Alink';
+import PageHeader from '~/components/features/PageHeader';
+import PostThree from '~/components/features/posts/PostThree';
 
 import { GET_POSTS_BY_PAGE } from '~/server/queries';
 import { Post } from '~/utils/types';

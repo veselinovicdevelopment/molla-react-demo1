@@ -25,7 +25,7 @@ interface DemoAction {
 }
 
 let initialState: DemoState = {
-    current: process.env.NEXT_PUBLIC_DEMO,
+    current: process.env.NEXT_PUBLIC_DEMO || '1',
     single: null,
     quickShow: false,
     videoShow: false,

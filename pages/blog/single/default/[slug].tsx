@@ -1,16 +1,16 @@
 import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, MouseEvent } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { connect } from 'react-redux';
 import StickyBox from 'react-sticky-box';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import ALink from '~/components/features/alink';
-import PageHeader from '~/components/features/page-header';
-import BlogSidebar from '~/components/partials/blog/sidebar/blog-sidebar';
+import ALink from '~/components/features/Alink';
+import PageHeader from '~/components/features/PageHeader';
+import BlogSidebar from '~/components/partials/blog/sidebar/BlogSidebar';
 
-import RelatedPosts from '~/components/partials/blog/related/related-posts';
+import RelatedPosts from '~/components/partials/blog/related/RelatedPosts';
 
 import { GET_POST } from '~/server/queries';
 import { actions as demoAction } from '~/store/demo';
@@ -48,35 +48,35 @@ const BlogDefault = (props: BlogDefaultProps) => {
         };
     }, []);
 
-    const openVideoModal = (e) => {
+    const openVideoModal = (e: MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
         props.showVideo();
     };
 
     const resizeHandle = () => {
-        if (document.querySelector('body').offsetWidth < 992) setToggle(true);
+        if (document.querySelector('body')!.offsetWidth < 992) setToggle(true);
         else setToggle(false);
     };
 
     const toggleSidebar = () => {
         if (
             document
-                .querySelector('body')
+                .querySelector('body')!
                 .classList.contains('sidebar-filter-active')
         ) {
             document
-                .querySelector('body')
+                .querySelector('body')!
                 .classList.remove('sidebar-filter-active');
         } else {
             document
-                .querySelector('body')
+                .querySelector('body')!
                 .classList.add('sidebar-filter-active');
         }
     };
 
     const hideSidebar = () => {
         document
-            .querySelector('body')
+            .querySelector('body')!
             .classList.remove('sidebar-filter-active');
     };
 
@@ -136,7 +136,7 @@ const BlogDefault = (props: BlogDefaultProps) => {
                                                         alt="Post"
                                                         src={
                                                             process.env
-                                                                .NEXT_PUBLIC_ASSET_URI +
+                                                                .NEXT_PUBLIC_ASSET_URI! +
                                                             post.image[0].url
                                                         }
                                                         threshold={500}
@@ -148,7 +148,7 @@ const BlogDefault = (props: BlogDefaultProps) => {
                                                             alt="Post"
                                                             src={
                                                                 process.env
-                                                                    .NEXT_PUBLIC_ASSET_URI +
+                                                                    .NEXT_PUBLIC_ASSET_URI! +
                                                                 post.image[0]
                                                                     .url
                                                             }
@@ -197,7 +197,7 @@ const BlogDefault = (props: BlogDefaultProps) => {
                                                                         src={`${
                                                                             process
                                                                                 .env
-                                                                                .NEXT_PUBLIC_ASSET_URI +
+                                                                                .NEXT_PUBLIC_ASSET_URI! +
                                                                             item.url
                                                                         }`}
                                                                         threshold={

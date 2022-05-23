@@ -1,21 +1,21 @@
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 
-import ALink from '~/components/features/alink';
-import LoginModal from '~/components/features/modals/login-modal';
-import HeaderSearch from '~/components/partials/header/partials/header-search';
-import WishlistMenu from '~/components/partials/header/partials/wishlist-menu';
-import CartMenu from '~/components/partials/header/partials/cart-menu';
-import CategoryMenu from '~/components/partials/header/partials/category-menu';
-import MainMenu from '~/components/partials/header/partials/main-menu';
-import StickyHeader from '~/components/features/sticky-header';
+import ALink from '~/components/features/Alink';
+import LoginModal from '~/components/features/modals/LoginModal';
+import HeaderSearch from '~/components/partials/header/partials/HeaderSearch';
+import WishlistMenu from '~/components/partials/header/partials/WhishlistMenu';
+import CartMenu from '~/components/partials/header/partials/CartMenu';
+import CategoryMenu from '~/components/partials/header/partials/CategoryMenu';
+import MainMenu from '~/components/partials/header/partials/MainMenu';
+import StickyHeader from '~/components/features/StickyHeader';
 
 const Header = () => {
     const router = useRouter();
     const [containerClass, setContainerClass] = useState('container');
 
     const openMobileMenu = () => {
-        document.querySelector('body').classList.add('mmenu-active');
+        document.querySelector('body')!.classList.add('mmenu-active');
     };
 
     useEffect(() => {

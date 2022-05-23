@@ -1,10 +1,9 @@
-import { NextPage } from 'next';
-import ALink from '~/components/features/alink';
-import PageHeader from '~/components/features/page-header';
-import Card from '~/components/features/accordion/card';
-import Accordion from '~/components/features/accordion/accordion';
+import ALink from '~/components/features/Alink';
+import PageHeader from '~/components/features/PageHeader';
+import Card from '~/components/features/accordion/Card';
+import Accordion from '~/components/features/accordion/Accordion';
 
-const FAQ: NextPage = () => {
+const FAQ = () => {
     return (
         <div className="main">
             <PageHeader title="F.A.Q" subTitle="Pages" />

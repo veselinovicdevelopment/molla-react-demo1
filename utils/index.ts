@@ -103,7 +103,7 @@ export const isEdgeBrowser = (): boolean => {
  * @param {Element} element
  */
 export const getIndex = (element: Element): number => {
-    let children = element.parentElement.children;
+    let children = element.parentElement!.children;
     for (let i = 0; i < children.length; i++) {
         if (element == children[i]) return i;
     }
@@ -119,7 +119,7 @@ export const getIndex = (element: Element): number => {
  */
 export const catFilter = (
     products: Product[] = [],
-    category: { name?: string; slug?: string }[],
+    category: string[],
     flag = false
 ): Product[] => {
     if (category[0] === 'All') return products;
@@ -147,7 +147,7 @@ export const attrFilter = (
     products: Product[] = [],
     attr: string
 ): Product[] => {
-    return products.filter((item) => {
+    return products.filter((item: Product) => {
         if (attr === 'all') {
             return true;
         }
@@ -164,7 +164,7 @@ export const attrFilter = (
             return true;
         }
 
-        return item[attr] === true;
+        return item[attr as keyof Product] === true;
     });
 };
 
@@ -223,16 +223,17 @@ export const countTo = () => {
         for (let i = 0; i < items.length; i++) {
             let item: Element = items[i];
             let amount =
-                parseInt(item.getAttribute('data-to'), 10) -
-                parseInt(item.getAttribute('data-from'), 10);
-            let time = parseInt(item.getAttribute('data-speed'), 10);
+                parseInt(item.getAttribute('data-to') || '0', 10) -
+                parseInt(item.getAttribute('data-from') || '0', 10);
+            let time = parseInt(item.getAttribute('data-speed') || '300', 10);
             let interval = parseInt(
-                item.getAttribute('data-refresh-interval'),
+                item.getAttribute('data-refresh-interval') || '1000',
                 10
             );
             let pt = 0;
             let height =
-                item.parentElement.parentElement.parentElement.offsetTop;
+                item.parentElement?.parentElement?.parentElement?.offsetTop ||
+                0;
             let flag = 0;
 
             document.addEventListener(

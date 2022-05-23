@@ -1,11 +1,10 @@
-import { NextPage } from 'next';
-import ALink from '~/components/features/alink';
-import PageHeader from '~/components/features/page-header';
-import ElementList from '~/components/partials/elements/element-list';
-import Card from '~/components/features/accordion/card';
-import Accordion from '~/components/features/accordion/accordion';
+import ALink from '~/components/features/Alink';
+import PageHeader from '~/components/features/PageHeader';
+import ElementList from '~/components/partials/elements/ElementList';
+import Card from '~/components/features/accordion/Card';
+import Accordion from '~/components/features/accordion/Accordion';
 
-const Accordions: NextPage = () => {
+const Accordions = () => {
     return (
         <div className="main">
             <PageHeader title="Accordions" subTitle="Elements" />

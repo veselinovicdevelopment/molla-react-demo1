@@ -7,9 +7,9 @@ import StickyBox from 'react-sticky-box';
 import { Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import ALink from '~/components/features/alink';
+import ALink from '~/components/features/Alink';
 
-import RelatedPosts from '~/components/partials/blog/related/related-posts';
+import RelatedPosts from '~/components/partials/blog/related/RelatedPosts';
 
 import { GET_POST } from '~/server/queries';
 import { actions as demoAction } from '~/store/demo';
@@ -75,7 +75,7 @@ const BlogFullwidth = (props: BlogFullWidthProps) => {
                                     <LazyLoadImage
                                         alt="Post"
                                         src={
-                                            process.env.NEXT_PUBLIC_ASSET_URI +
+                                            process.env.NEXT_PUBLIC_ASSET_URI! +
                                             post.image[0].url
                                         }
                                         threshold={500}
@@ -89,7 +89,7 @@ const BlogFullwidth = (props: BlogFullWidthProps) => {
                                     <LazyLoadImage
                                         alt="Post"
                                         src={
-                                            process.env.NEXT_PUBLIC_ASSET_URI +
+                                            process.env.NEXT_PUBLIC_ASSET_URI! +
                                             post.image[0].url
                                         }
                                         threshold={500}
@@ -116,15 +116,15 @@ const BlogFullwidth = (props: BlogFullWidthProps) => {
                                 slidesPerView={1}
                             >
                                 {post.image.map((item, index) => (
-                                    <SwiperSlide>
-                                        <div key={index}>
+                                    <SwiperSlide key={index}>
+                                        <div>
                                             <div className="lazy-overlay"></div>
 
                                             <LazyLoadImage
                                                 alt="Post"
                                                 src={`${
                                                     process.env
-                                                        .NEXT_PUBLIC_ASSET_URI +
+                                                        .NEXT_PUBLIC_ASSET_URI! +
                                                     item.url
                                                 }`}
                                                 threshold={500}

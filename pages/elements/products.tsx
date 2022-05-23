@@ -1,23 +1,22 @@
-import { NextPage } from 'next';
 import { useQuery } from '@apollo/client';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import ALink from '~/components/features/alink';
-import PageHeader from '~/components/features/page-header';
-import ElementList from '~/components/partials/elements/element-list';
+import ALink from '~/components/features/Alink';
+import PageHeader from '~/components/features/PageHeader';
+import ElementList from '~/components/partials/elements/ElementList';
 
-import ProductOne from '~/components/features/products/product-one';
-import ProductTwo from '~/components/features/products/product-two';
-import ProductThree from '~/components/features/products/product-three';
-import ProductFour from '~/components/features/products/product-four';
-import ProductFive from '~/components/features/products/product-five';
-import ProductSix from '~/components/features/products/product-six';
-import ProductSeven from '~/components/features/products/product-seven';
+import ProductOne from '~/components/features/products/ProductOne';
+import ProductTwo from '~/components/features/products/ProductTwo';
+import ProductThree from '~/components/features/products/ProductThree';
+import ProductFour from '~/components/features/products/ProductFour';
+import ProductFive from '~/components/features/products/ProductFive';
+import ProductSix from '~/components/features/products/ProductSix';
+import ProductSeven from '~/components/features/products/ProductSeven';
 
 import { GET_ELEMENT_PRODUCTS } from '~/server/queries';
 import { Product } from '~/utils/types';
 
-const Products: NextPage = () => {
+const Products = () => {
     const { data, loading, error } = useQuery(GET_ELEMENT_PRODUCTS);
     const products: Product[] = data && data.elementProducts;
     const productGroup1: Product[] = data && data.elementProducts.slice(0, 3);

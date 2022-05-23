@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-import ALink from '~/components/features/alink';
+import ALink from '~/components/features/Alink';
 
 interface PageinationProps {
     perPage: number;

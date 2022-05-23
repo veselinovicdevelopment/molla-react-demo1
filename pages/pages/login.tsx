@@ -1,8 +1,7 @@
-import { NextPage } from 'next';
 import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
-import ALink from '~/components/features/alink';
+import ALink from '~/components/features/Alink';
 
-const Login: NextPage = () => {
+const Login = () => {
     return (
         <div className="main">
             <nav className="breadcrumb-nav border-0 mb-0">

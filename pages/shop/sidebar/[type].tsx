@@ -1,14 +1,13 @@
-import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import StickyBox from 'react-sticky-box';
 
-import ALink from '~/components/features/alink';
-import PageHeader from '~/components/features/page-header';
-import ShopListOne from '~/components/partials/shop/list/shop-list-one';
-import Pagination from '~/components/features/pagination';
-import ShopSidebarOne from '~/components/partials/shop/sidebar/shop-sidebar-one';
+import ALink from '~/components/features/Alink';
+import PageHeader from '~/components/features/PageHeader';
+import ShopListOne from '~/components/partials/shop/list/ShopListOne';
+import Pagination from '~/components/features/Pagination';
+import ShopSidebarOne from '~/components/partials/shop/sidebar/ShopSidebarOne';
 
 import { GET_PRODUCTS } from '~/server/queries';
 import { scrollToPageContent } from '~/utils';
@@ -27,7 +26,7 @@ interface Query {
     page?: string;
 }
 
-const ShopGrid: NextPage = () => {
+const ShopGrid = () => {
     const router = useRouter();
     const type = router.query.type;
     const query: Query = router.query;
@@ -48,7 +47,7 @@ const ShopGrid: NextPage = () => {
     }, []);
 
     const resizeHandle = () => {
-        if (document.querySelector('body').offsetWidth < 992) setToggle(true);
+        if (document.querySelector('body')!.offsetWidth < 992) setToggle(true);
         else setToggle(false);
     };
 
@@ -59,8 +58,8 @@ const ShopGrid: NextPage = () => {
                 color: query.color ? query.color.split(',') : [],
                 size: query.size ? query.size.split(',') : [],
                 brand: query.brand ? query.brand.split(',') : [],
-                minPrice: parseInt(query.minPrice),
-                maxPrice: parseInt(query.maxPrice),
+                minPrice: parseInt(query.minPrice as string),
+                maxPrice: parseInt(query.maxPrice as string),
                 category: query.category,
                 sortBy: query.sortBy ? query.sortBy : 'default',
                 page: query.page ? parseInt(query.page) : 1,
@@ -94,7 +93,7 @@ const ShopGrid: NextPage = () => {
 
     const onSortByChange = (e: ChangeEvent<HTMLSelectElement>) => {
         let queryObject = router.query;
-        let url = router.pathname.replace('[type]', query.type) + '?';
+        let url = router.pathname.replace('[type]', query.type as string) + '?';
         for (let key in queryObject) {
             if (key !== 'type' && key !== 'sortBy') {
                 url += key + '=' + queryObject[key] + '&';
@@ -107,22 +106,22 @@ const ShopGrid: NextPage = () => {
     const toggleSidebar = () => {
         if (
             document
-                .querySelector('body')
+                .querySelector('body')!
                 .classList.contains('sidebar-filter-active')
         ) {
             document
-                .querySelector('body')
+                .querySelector('body')!
                 .classList.remove('sidebar-filter-active');
         } else {
             document
-                .querySelector('body')
+                .querySelector('body')!
                 .classList.add('sidebar-filter-active');
         }
     };
 
     const hideSidebar = () => {
         document
-            .querySelector('body')
+            .querySelector('body')!
             .classList.remove('sidebar-filter-active');
     };
 

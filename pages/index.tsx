@@ -1,23 +1,21 @@
-import { NextPage } from 'next';
 import { useQuery } from '@apollo/client';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Countdown from 'react-countdown';
-import Slide from 'react-reveal/Slide';
-import Fade from 'react-reveal/Fade';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { addApolloState, initializeApollo } from '~/server/apollo';
 
-import ALink from '~/components/features/alink';
-import SpecialCollection from '~/components/partials/home/special-collection';
-import TopCollection from '~/components/partials/home/top-collection';
-import BlogCollection from '~/components/partials/home/blog-collection';
-import NewsletterModal from '~/components/features/modals/newsletter-modal';
-import { rendererThree } from '~/components/features/count-down';
+import ALink from '~/components/features/Alink';
+import SpecialCollection from '~/components/partials/home/SpecialCollection';
+import TopCollection from '~/components/partials/home/TopCollection';
+import BlogCollection from '~/components/partials/home/BlogCollection';
+import NewsletterModal from '~/components/features/modals/NewsletterModal';
+import { rendererThree } from '~/components/features/CountDown';
 
 import { GET_HOME_DATA } from '~/server/queries';
 import { attrFilter } from '~/utils';
 import { homeData } from '~/utils/data';
 
-const Home: NextPage = () => {
+const Home = () => {
     const { data, loading, error } = useQuery(GET_HOME_DATA);
     const products = data && data.homeData.products;
     const topProducts = attrFilter(data && data.homeData.products, 'top');
@@ -49,28 +47,27 @@ const Home: NextPage = () => {
                             }}
                         >
                             <div className="container intro-content">
-                                <Slide bottom delay={10} duration={500}>
-                                    <>
-                                        <h3 className="intro-subtitle">
-                                            Deals and Promotions
-                                        </h3>
-                                        <h1 className="intro-title">
-                                            Wooden <br />
-                                            Sideboard Table <br />
-                                            <span className="text-primary">
-                                                <sup>$</sup>49,99
-                                            </span>
-                                        </h1>
+                                <div>
+                                    <h3 className="intro-subtitle">
+                                        Deals and Promotions
+                                    </h3>
+                                    <h1 className="intro-title">
+                                        Wooden <br />
+                                        Sideboard Table <br />
+                                        <span className="text-primary">
+                                            <sup>$</sup>49,99
+                                        </span>
+                                    </h1>
 
-                                        <ALink
-                                            href="/shop/sidebar/list"
-                                            className="btn btn-dark btn-outline-darker"
-                                        >
-                                            <span>Shop Now</span>
-                                            <i className="icon-long-arrow-right"></i>
-                                        </ALink>
-                                    </>
-                                </Slide>
+                                    <ALink
+                                        href="/shop/sidebar/list"
+                                        className="btn btn-dark btn-outline-darker"
+                                    >
+                                        <span>Shop Now</span>
+                                        <i className="icon-long-arrow-right"></i>
+                                    </ALink>
+                                </div>
+
                                 <img
                                     src="images/home/sliders/slide-1-3.png"
                                     className="position-absolute"
@@ -88,7 +85,7 @@ const Home: NextPage = () => {
                             }}
                         >
                             <div className="container intro-content text-right">
-                                <Slide bottom delay={10} duration={500}>
+                                <div>
                                     <div className="d-inline-block text-left">
                                         <h3 className="intro-subtitle">
                                             Bedroom Furniture
@@ -106,7 +103,7 @@ const Home: NextPage = () => {
                                             <i className="icon-long-arrow-right"></i>
                                         </ALink>
                                     </div>
-                                </Slide>
+                                </div>
                             </div>
                         </div>
                     </SwiperSlide>
@@ -121,37 +118,35 @@ const Home: NextPage = () => {
                             }}
                         >
                             <div className="container intro-content">
-                                <Slide bottom delay={10} duration={500}>
-                                    <>
-                                        <h3 className="intro-subtitle">
-                                            Baskets & Storage
-                                        </h3>
-                                        <h1 className="intro-title">
-                                            Laundary Basket
-                                            <br />
-                                            <span className="text-primary">
-                                                <sup className="text-grey font-weight-light">
-                                                    from
-                                                </sup>
-                                                <sup>$</sup>9,99
-                                            </span>
-                                        </h1>
+                                <div>
+                                    <h3 className="intro-subtitle">
+                                        Baskets & Storage
+                                    </h3>
+                                    <h1 className="intro-title">
+                                        Laundary Basket
+                                        <br />
+                                        <span className="text-primary">
+                                            <sup className="text-grey font-weight-light">
+                                                from
+                                            </sup>
+                                            <sup>$</sup>9,99
+                                        </span>
+                                    </h1>
 
-                                        <ALink
-                                            href="/shop/sidebar/list"
-                                            className="btn btn-dark btn-outline-darker"
-                                        >
-                                            <span>Shop Now</span>
-                                            <i className="icon-long-arrow-right"></i>
-                                        </ALink>
-                                    </>
-                                </Slide>
+                                    <ALink
+                                        href="/shop/sidebar/list"
+                                        className="btn btn-dark btn-outline-darker"
+                                    >
+                                        <span>Shop Now</span>
+                                        <i className="icon-long-arrow-right"></i>
+                                    </ALink>
+                                </div>
                             </div>
                         </div>
                     </SwiperSlide>
                 </Swiper>
             </div>
-            <Fade delay={10} duration={500} triggerOnce>
+            <div className="animation-fade">
                 <Swiper
                     className="brands-border"
                     autoplay={false}
@@ -190,7 +185,7 @@ const Home: NextPage = () => {
                         </SwiperSlide>
                     ))}
                 </Swiper>
-            </Fade>
+            </div>
 
             <div className="mb-3 mb-lg-5"></div>
 
@@ -198,43 +193,41 @@ const Home: NextPage = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-sm-6 col-lg-5">
-                            <Slide left delay={150} duration={500} triggerOnce>
-                                <div className="banner banner-large banner-overlay banner-overlay-light banner-lg banner-1 lazy-media">
-                                    <div className="lazy-overlay"></div>
+                            <div className="banner banner-large banner-overlay banner-overlay-light banner-lg banner-1 lazy-media">
+                                <div className="lazy-overlay"></div>
 
-                                    <LazyLoadImage
-                                        alt="banner"
-                                        src="images/home/banners/banner-1.jpg"
-                                        threshold={200}
-                                        width="100%"
-                                        height="auto"
-                                        effect="blur"
-                                    />
+                                <LazyLoadImage
+                                    alt="banner"
+                                    src="images/home/banners/banner-1.jpg"
+                                    threshold={200}
+                                    width="100%"
+                                    height="auto"
+                                    effect="blur"
+                                />
 
-                                    <div className="banner-content banner-content-top">
-                                        <h4 className="banner-subtitle">
-                                            Clearence
-                                        </h4>
-                                        <h3 className="banner-title">
-                                            Coffee Tables
-                                        </h3>
-                                        <div className="banner-text">
-                                            from $19.99
-                                        </div>
-                                        <ALink
-                                            href="/shop/sidebar/list"
-                                            className="btn btn-outline-gray banner-link"
-                                        >
-                                            Shop Now
-                                            <i className="icon-long-arrow-right"></i>
-                                        </ALink>
+                                <div className="banner-content banner-content-top">
+                                    <h4 className="banner-subtitle">
+                                        Clearence
+                                    </h4>
+                                    <h3 className="banner-title">
+                                        Coffee Tables
+                                    </h3>
+                                    <div className="banner-text">
+                                        from $19.99
                                     </div>
+                                    <ALink
+                                        href="/shop/sidebar/list"
+                                        className="btn btn-outline-gray banner-link"
+                                    >
+                                        Shop Now
+                                        <i className="icon-long-arrow-right"></i>
+                                    </ALink>
                                 </div>
-                            </Slide>
+                            </div>
                         </div>
 
                         <div className="col-sm-6 col-lg-3">
-                            <Fade delay={150} duration={500} triggerOnce>
+                            <div className="animation-fade">
                                 <div className="banner banner-overlay banner-lg banner-2 lazy-media">
                                     <div className="lazy-overlay"></div>
 
@@ -266,78 +259,76 @@ const Home: NextPage = () => {
                                         </ALink>
                                     </div>
                                 </div>
-                            </Fade>
+                            </div>
                         </div>
 
                         <div className="col-sm-12 col-md-12 col-lg-4">
-                            <Slide right delay={150} duration={500} triggerOnce>
-                                <div className="row">
-                                    <div className="col-lg-12 col-md-6 col-sm-6">
-                                        <div className="banner banner-3 banner-overlay lazy-media">
-                                            <div className="lazy-overlay"></div>
+                            <div className="row">
+                                <div className="col-lg-12 col-md-6 col-sm-6">
+                                    <div className="banner banner-3 banner-overlay lazy-media">
+                                        <div className="lazy-overlay"></div>
 
-                                            <LazyLoadImage
-                                                alt="banner"
-                                                src="images/home/banners/banner-3.jpg"
-                                                threshold={200}
-                                                height="auto"
-                                                width="100%"
-                                                effect="blur"
-                                            />
+                                        <LazyLoadImage
+                                            alt="banner"
+                                            src="images/home/banners/banner-3.jpg"
+                                            threshold={200}
+                                            height="auto"
+                                            width="100%"
+                                            effect="blur"
+                                        />
 
-                                            <div className="banner-content banner-content-top">
-                                                <h4 className="banner-subtitle">
-                                                    New Arrivals
-                                                </h4>
-                                                <h3 className="banner-title">
-                                                    Home Decor
-                                                </h3>
-                                                <ALink
-                                                    href="/shop/sidebar/list"
-                                                    className="btn btn-outline-gray banner-link"
-                                                >
-                                                    Discover Now
-                                                    <i className="icon-long-arrow-right"></i>
-                                                </ALink>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="col-lg-12 col-md-6 col-sm-6">
-                                        <div className="banner banner-4 banner-overlay banner-overlay-light lazy-media">
-                                            <div className="lazy-overlay"></div>
-
-                                            <LazyLoadImage
-                                                alt="banner"
-                                                src="images/home/banners/banner-4.jpg"
-                                                threshold={200}
-                                                width="100%"
-                                                height="auto"
-                                                effect="blur"
-                                            />
-
-                                            <div className="banner-content banner-content-top">
-                                                <h4 className="banner-subtitle">
-                                                    On Sale
-                                                </h4>
-                                                <h3 className="banner-title">
-                                                    Collection Chairs
-                                                </h3>
-                                                <div className="banner-text">
-                                                    up to 30% off
-                                                </div>
-                                                <ALink
-                                                    href="/shop/sidebar/list"
-                                                    className="btn btn-outline-gray banner-link"
-                                                >
-                                                    Shop Now
-                                                    <i className="icon-long-arrow-right"></i>
-                                                </ALink>
-                                            </div>
+                                        <div className="banner-content banner-content-top">
+                                            <h4 className="banner-subtitle">
+                                                New Arrivals
+                                            </h4>
+                                            <h3 className="banner-title">
+                                                Home Decor
+                                            </h3>
+                                            <ALink
+                                                href="/shop/sidebar/list"
+                                                className="btn btn-outline-gray banner-link"
+                                            >
+                                                Discover Now
+                                                <i className="icon-long-arrow-right"></i>
+                                            </ALink>
                                         </div>
                                     </div>
                                 </div>
-                            </Slide>
+
+                                <div className="col-lg-12 col-md-6 col-sm-6">
+                                    <div className="banner banner-4 banner-overlay banner-overlay-light lazy-media">
+                                        <div className="lazy-overlay"></div>
+
+                                        <LazyLoadImage
+                                            alt="banner"
+                                            src="images/home/banners/banner-4.jpg"
+                                            threshold={200}
+                                            width="100%"
+                                            height="auto"
+                                            effect="blur"
+                                        />
+
+                                        <div className="banner-content banner-content-top">
+                                            <h4 className="banner-subtitle">
+                                                On Sale
+                                            </h4>
+                                            <h3 className="banner-title">
+                                                Collection Chairs
+                                            </h3>
+                                            <div className="banner-text">
+                                                up to 30% off
+                                            </div>
+                                            <ALink
+                                                href="/shop/sidebar/list"
+                                                className="btn btn-outline-gray banner-link"
+                                            >
+                                                Shop Now
+                                                <i className="icon-long-arrow-right"></i>
+                                            </ALink>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -345,16 +336,16 @@ const Home: NextPage = () => {
 
             <div className="mb-3"></div>
 
-            <Fade delay={200} duration={500} triggerOnce>
+            <div className="animation-fade">
                 <SpecialCollection products={products} loading={loading} />
-            </Fade>
+            </div>
             <div className="bg-light deal-container pt-5 pb-3 mb-5">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-9">
                             <div className="deal">
                                 <div className="deal-content">
-                                    <Fade delay={200} duration={500}>
+                                    <div className="animation-fade">
                                         <>
                                             <h4>Limited Quantities</h4>
                                             <h2>Deal of the Day</h2>
@@ -387,28 +378,24 @@ const Home: NextPage = () => {
                                                 <i className="icon-long-arrow-right"></i>
                                             </ALink>
                                         </>
-                                    </Fade>
+                                    </div>
                                 </div>
 
                                 <div className="deal-image position-relative">
-                                    <Fade
-                                        delay={200}
-                                        duration={500}
-                                        triggerOnce
-                                    >
+                                    <div className="animation-fade">
                                         <ALink href="/shop/sidebar/list">
                                             <div className="lazy-overlay bg-white"></div>
 
                                             <LazyLoadImage
                                                 alt="deal-banner"
                                                 src="images/home/deal/deal-1.png"
-                                                threshold="300"
+                                                threshold={300}
                                                 effect="blur"
                                                 width="100%"
                                                 height={460}
                                             />
                                         </ALink>
-                                    </Fade>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -421,7 +408,7 @@ const Home: NextPage = () => {
                                     <LazyLoadImage
                                         alt="deal-banner"
                                         src="images/home/banners/banner-5.jpg"
-                                        threshold="300"
+                                        threshold={300}
                                         effect="blur"
                                         className="h-100"
                                         width="100%"
@@ -453,11 +440,11 @@ const Home: NextPage = () => {
                 </div>
             </div>
             <div className="mb-6"></div>
-            <Fade delay={200} duration={500}>
+            <div className="animation-fade">
                 <TopCollection products={topProducts} loading={loading} />
-            </Fade>
+            </div>
             <BlogCollection posts={posts} loading={loading}></BlogCollection>
-            <Fade delay={200} duration={500} triggerOnce>
+            <div className="animation-fade">
                 <div className="icon-boxes-container">
                     <div className="container">
                         <div className="row">
@@ -526,8 +513,8 @@ const Home: NextPage = () => {
                         </div>
                     </div>
                 </div>
-            </Fade>
-            <Fade delay={200} duration={500} triggerOnce>
+            </div>
+            <div className="animation-fade">
                 <div
                     className="footer-newsletter bg-image"
                     style={{
@@ -572,7 +559,7 @@ const Home: NextPage = () => {
                         </div>
                     </div>
                 </div>
-            </Fade>
+            </div>
             <NewsletterModal />
         </div>
     );

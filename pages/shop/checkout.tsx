@@ -1,12 +1,11 @@
-import { NextPage } from 'next';
-import { useEffect } from 'react';
+import { MouseEvent, useEffect } from 'react';
 import { connect } from 'react-redux';
-import SlideToggle from 'react-slide-toggle';
+import useCollapse from 'react-collapsed';
 
-import ALink from '~/components/features/alink';
-import Accordion from '~/components/features/accordion/accordion';
-import Card from '~/components/features/accordion/card';
-import PageHeader from '~/components/features/page-header';
+import ALink from '~/components/features/Alink';
+import MollaAccordion from '~/components/features/accordion/Accordion';
+import Card from '~/components/features/accordion/Card';
+import PageHeader from '~/components/features/PageHeader';
 
 import { cartPriceTotal } from '~/utils/index';
 import { CartItem } from '~/utils/types';
@@ -15,15 +14,16 @@ interface CheckoutProps {
     cartlist: CartItem[];
 }
 
-const Checkout: NextPage = (props: CheckoutProps) => {
+const Checkout = (props: CheckoutProps) => {
     const { cartlist } = props;
+    const { getCollapseProps, getToggleProps, isExpanded } = useCollapse();
 
     useEffect(() => {
-        document.querySelector('body').addEventListener('click', clearOpacity);
+        document.querySelector('body')!.addEventListener('click', clearOpacity);
 
         return () => {
             document
-                .querySelector('body')
+                .querySelector('body')!
                 .removeEventListener('click', clearOpacity);
         };
     }, []);
@@ -37,14 +37,14 @@ const Checkout: NextPage = (props: CheckoutProps) => {
             ).value == ''
         )
             document
-                .querySelector('#checkout-discount-form label')
+                .querySelector('#checkout-discount-form label')!
                 .removeAttribute('style');
     };
 
-    const addOpacity = (e) => {
-        e.currentTarget.parentNode
-            .querySelector('label')
-            .setAttribute('style', 'opacity: 0');
+    const addOpacity = (e: MouseEvent<HTMLInputElement>) => {
+        e.currentTarget?.parentNode
+            ?.querySelector('label')
+            ?.setAttribute('style', 'opacity: 0');
     };
 
     return (
@@ -200,205 +200,49 @@ const Checkout: NextPage = (props: CheckoutProps) => {
                                         </label>
                                     </div>
 
-                                    <SlideToggle duration={300} collapsed>
-                                        {({
-                                            onToggle,
-                                            setCollapsibleElement,
-                                        }) => (
-                                            <div className="form-group">
-                                                <div className="custom-control custom-checkbox mt-0 address-box">
-                                                    <input
-                                                        type="checkbox"
-                                                        className="custom-control-input"
-                                                        id="different-shipping"
-                                                        onChange={onToggle}
-                                                    />
-                                                    <label
-                                                        className="custom-control-label"
-                                                        htmlFor="different-shipping"
-                                                    >
-                                                        Ship to a different
-                                                        address?
-                                                    </label>
+                                    <div className="form-group">
+                                        <div className="custom-control custom-checkbox mt-0 address-box">
+                                            <input
+                                                type="checkbox"
+                                                className="custom-control-input"
+                                                checked={isExpanded}
+                                            />
+                                            <label
+                                                className="custom-control-label"
+                                                htmlFor="different-shipping"
+                                                {...getToggleProps()}
+                                            >
+                                                Ship to a different address?
+                                            </label>
+                                        </div>
+                                        <div
+                                            className="shipping-info"
+                                            {...getCollapseProps()}
+                                        >
+                                            <div className="row">
+                                                <div className="col-md-6">
+                                                    <div className="form-group">
+                                                        <label>
+                                                            First name{' '}
+                                                            <abbr
+                                                                className="required"
+                                                                title="required"
+                                                            >
+                                                                *
+                                                            </abbr>
+                                                        </label>
+                                                        <input
+                                                            type="text"
+                                                            className="form-control"
+                                                            required
+                                                        />
+                                                    </div>
                                                 </div>
-                                                <div
-                                                    className="shipping-info"
-                                                    ref={setCollapsibleElement}
-                                                    style={{
-                                                        overflow: 'hidden',
-                                                    }}
-                                                >
-                                                    <div className="row">
-                                                        <div className="col-md-6">
-                                                            <div className="form-group">
-                                                                <label>
-                                                                    First name{' '}
-                                                                    <abbr
-                                                                        className="required"
-                                                                        title="required"
-                                                                    >
-                                                                        *
-                                                                    </abbr>
-                                                                </label>
-                                                                <input
-                                                                    type="text"
-                                                                    className="form-control"
-                                                                    required
-                                                                />
-                                                            </div>
-                                                        </div>
 
-                                                        <div className="col-md-6">
-                                                            <div className="form-group">
-                                                                <label>
-                                                                    Last name{' '}
-                                                                    <abbr
-                                                                        className="required"
-                                                                        title="required"
-                                                                    >
-                                                                        *
-                                                                    </abbr>
-                                                                </label>
-                                                                <input
-                                                                    type="text"
-                                                                    className="form-control"
-                                                                    required
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
+                                                <div className="col-md-6">
                                                     <div className="form-group">
                                                         <label>
-                                                            Company name
-                                                            (optional)
-                                                        </label>
-                                                        <input
-                                                            type="text"
-                                                            className="form-control"
-                                                        />
-                                                    </div>
-
-                                                    <div className="select-custom">
-                                                        <label>
-                                                            Country / Region{' '}
-                                                            <span className="required">
-                                                                *
-                                                            </span>
-                                                        </label>
-                                                        <select
-                                                            name="orderby"
-                                                            className="form-control"
-                                                        >
-                                                            <option
-                                                                value=""
-                                                                defaultValue="selected"
-                                                            >
-                                                                Vanuatu
-                                                            </option>
-                                                            <option value="1">
-                                                                Brunei
-                                                            </option>
-                                                            <option value="2">
-                                                                Bulgaria
-                                                            </option>
-                                                            <option value="3">
-                                                                Burkina Faso
-                                                            </option>
-                                                            <option value="4">
-                                                                Burundi
-                                                            </option>
-                                                            <option value="5">
-                                                                Cameroon
-                                                            </option>
-                                                        </select>
-                                                    </div>
-
-                                                    <div className="form-group mb-1 pb-2">
-                                                        <label>
-                                                            Street address{' '}
-                                                            <abbr
-                                                                className="required"
-                                                                title="required"
-                                                            >
-                                                                *
-                                                            </abbr>
-                                                        </label>
-                                                        <input
-                                                            type="text"
-                                                            className="form-control"
-                                                            placeholder="House number and street name"
-                                                            required
-                                                        />
-                                                    </div>
-
-                                                    <div className="form-group">
-                                                        <input
-                                                            type="text"
-                                                            className="form-control"
-                                                            placeholder="Apartment, suite, unit, etc. (optional)"
-                                                            required
-                                                        />
-                                                    </div>
-
-                                                    <div className="form-group">
-                                                        <label>
-                                                            Town / City{' '}
-                                                            <abbr
-                                                                className="required"
-                                                                title="required"
-                                                            >
-                                                                *
-                                                            </abbr>
-                                                        </label>
-                                                        <input
-                                                            type="text"
-                                                            className="form-control"
-                                                            required
-                                                        />
-                                                    </div>
-
-                                                    <div className="select-custom">
-                                                        <label>
-                                                            State / County{' '}
-                                                            <abbr
-                                                                className="required"
-                                                                title="required"
-                                                            >
-                                                                *
-                                                            </abbr>
-                                                        </label>
-                                                        <select
-                                                            name="orderby"
-                                                            className="form-control"
-                                                        >
-                                                            <option
-                                                                value=""
-                                                                defaultValue="selected"
-                                                            >
-                                                                NY
-                                                            </option>
-                                                            <option value="1">
-                                                                Brunei
-                                                            </option>
-                                                            <option value="2">
-                                                                Bulgaria
-                                                            </option>
-                                                            <option value="3">
-                                                                Burkina Faso
-                                                            </option>
-                                                            <option value="4">
-                                                                Burundi
-                                                            </option>
-                                                            <option value="5">
-                                                                Cameroon
-                                                            </option>
-                                                        </select>
-                                                    </div>
-
-                                                    <div className="form-group">
-                                                        <label>
-                                                            Postcode / ZIP{' '}
+                                                            Last name{' '}
                                                             <abbr
                                                                 className="required"
                                                                 title="required"
@@ -414,8 +258,152 @@ const Checkout: NextPage = (props: CheckoutProps) => {
                                                     </div>
                                                 </div>
                                             </div>
-                                        )}
-                                    </SlideToggle>
+
+                                            <div className="form-group">
+                                                <label>
+                                                    Company name (optional)
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                />
+                                            </div>
+
+                                            <div className="select-custom">
+                                                <label>
+                                                    Country / Region{' '}
+                                                    <span className="required">
+                                                        *
+                                                    </span>
+                                                </label>
+                                                <select
+                                                    name="orderby"
+                                                    className="form-control"
+                                                >
+                                                    <option
+                                                        value=""
+                                                        defaultValue="selected"
+                                                    >
+                                                        Vanuatu
+                                                    </option>
+                                                    <option value="1">
+                                                        Brunei
+                                                    </option>
+                                                    <option value="2">
+                                                        Bulgaria
+                                                    </option>
+                                                    <option value="3">
+                                                        Burkina Faso
+                                                    </option>
+                                                    <option value="4">
+                                                        Burundi
+                                                    </option>
+                                                    <option value="5">
+                                                        Cameroon
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                            <div className="form-group mb-1 pb-2">
+                                                <label>
+                                                    Street address{' '}
+                                                    <abbr
+                                                        className="required"
+                                                        title="required"
+                                                    >
+                                                        *
+                                                    </abbr>
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    placeholder="House number and street name"
+                                                    required
+                                                />
+                                            </div>
+
+                                            <div className="form-group">
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    placeholder="Apartment, suite, unit, etc. (optional)"
+                                                    required
+                                                />
+                                            </div>
+
+                                            <div className="form-group">
+                                                <label>
+                                                    Town / City{' '}
+                                                    <abbr
+                                                        className="required"
+                                                        title="required"
+                                                    >
+                                                        *
+                                                    </abbr>
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    required
+                                                />
+                                            </div>
+
+                                            <div className="select-custom">
+                                                <label>
+                                                    State / County{' '}
+                                                    <abbr
+                                                        className="required"
+                                                        title="required"
+                                                    >
+                                                        *
+                                                    </abbr>
+                                                </label>
+                                                <select
+                                                    name="orderby"
+                                                    className="form-control"
+                                                >
+                                                    <option
+                                                        value=""
+                                                        defaultValue="selected"
+                                                    >
+                                                        NY
+                                                    </option>
+                                                    <option value="1">
+                                                        Brunei
+                                                    </option>
+                                                    <option value="2">
+                                                        Bulgaria
+                                                    </option>
+                                                    <option value="3">
+                                                        Burkina Faso
+                                                    </option>
+                                                    <option value="4">
+                                                        Burundi
+                                                    </option>
+                                                    <option value="5">
+                                                        Cameroon
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                            <div className="form-group">
+                                                <label>
+                                                    Postcode / ZIP{' '}
+                                                    <abbr
+                                                        className="required"
+                                                        title="required"
+                                                    >
+                                                        *
+                                                    </abbr>
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <label>Order notes (optional)</label>
                                     <textarea
@@ -502,7 +490,7 @@ const Checkout: NextPage = (props: CheckoutProps) => {
                                             </tbody>
                                         </table>
 
-                                        <Accordion type="checkout">
+                                        <MollaAccordion type="checkout">
                                             <Card
                                                 title="Direct bank transfer"
                                                 expanded={true}
@@ -555,7 +543,7 @@ const Checkout: NextPage = (props: CheckoutProps) => {
                                                 Quisque volutpat mattis eros.
                                                 Lorem ipsum dolor sit ame.
                                             </Card>
-                                        </Accordion>
+                                        </MollaAccordion>
 
                                         <button
                                             type="submit"

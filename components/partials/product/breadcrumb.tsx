@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import ALink from '~/components/features/alink';
+import ALink from '~/components/features/Alink';
 import { Product } from '~/utils/types';
 
 interface BreadcrumbProps {
@@ -51,7 +51,7 @@ const Breadcrumb = (props: BreadcrumbProps) => {
                                 <figure>
                                     <img
                                         src={
-                                            process.env.NEXT_PUBLIC_ASSET_URI +
+                                            process.env.NEXT_PUBLIC_ASSET_URI! +
                                             prev.sm_pictures[0].url
                                         }
                                         alt="product"
@@ -82,7 +82,7 @@ const Breadcrumb = (props: BreadcrumbProps) => {
                                 <figure>
                                     <img
                                         src={
-                                            process.env.NEXT_PUBLIC_ASSET_URI +
+                                            process.env.NEXT_PUBLIC_ASSET_URI! +
                                             next.sm_pictures[0].url
                                         }
                                         alt="product"

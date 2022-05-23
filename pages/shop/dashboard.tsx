@@ -1,9 +1,8 @@
-import { NextPage } from 'next';
 import React, { MouseEvent } from 'react';
 import { Tabs, TabList, TabPanel, Tab } from 'react-tabs';
 
-import ALink from '~/components/features/alink';
-import PageHeader from '~/components/features/page-header';
+import ALink from '~/components/features/Alink';
+import PageHeader from '~/components/features/PageHeader';
 
 const DashBoard = () => {
     const toOrder = (e: MouseEvent<HTMLAnchorElement>) => {

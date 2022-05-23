@@ -1,12 +1,11 @@
-import { NextPage } from 'next';
 import React, { useEffect } from 'react';
 
-import ALink from '~/components/features/alink';
-import PageHeader from '~/components/features/page-header';
+import ALink from '~/components/features/Alink';
+import PageHeader from '~/components/features/PageHeader';
 import { countTo } from '~/utils';
 import { homeData } from '~/utils/data';
 
-const About2: NextPage = () => {
+const About2 = () => {
     useEffect(() => {
         countTo();
     }, []);
@@ -593,8 +592,8 @@ const About2: NextPage = () => {
                         <div className="col-lg-10 offset-lg-1">
                             <div className="brands-text text-center mx-auto mb-6">
                                 <h2 className="title">
-                                    The world's premium design brands in one
-                                    destination.
+                                    The world&apos;s premium design brands in
+                                    one destination.
                                 </h2>
                                 <p>
                                     Phasellus hendrerit. Pellentesque aliquet

@@ -6,19 +6,19 @@ import { useRouter } from 'next/router';
 import 'react-image-lightbox/style.css';
 import 'react-toastify/dist/ReactToastify.min.css';
 
-import Header from './partials/header/header';
-import Footer from './partials/footer/footer';
-import VideoModal from './features/modals/video-modal';
-import QuickViewModal from './features/modals/quickview-modal';
-import MobileMenu from './features/mobile-menu';
+import Header from './partials/header/Header';
+import Footer from './partials/footer/Footer';
+import VideoModal from './features/modals/VideoModal';
+import QuickViewModal from './features/modals/QuickviewModal';
+import MobileMenu from './features/MobileMenu';
 
 import { actions } from '../store/demo';
 import { isSafariBrowser, isEdgeBrowser } from '~/utils';
 
 interface LayoutProps {
     children: ReactNode;
-    hideQuick?: () => void;
-    hideVideo?: () => void;
+    hideQuick: () => void;
+    hideVideo: () => void;
 }
 
 const Layout = ({ children, hideQuick, hideVideo }: LayoutProps) => {
@@ -27,18 +27,19 @@ const Layout = ({ children, hideQuick, hideVideo }: LayoutProps) => {
 
     useEffect(() => {
         if (router.pathname.includes('pages/coming-soon')) {
-            document.querySelector('header').classList.add('d-none');
-            document.querySelector('footer').classList.add('d-none');
+            document.querySelector('header')?.classList.add('d-none');
+            document.querySelector('footer')?.classList.add('d-none');
         } else {
-            document.querySelector('header').classList.remove('d-none');
-            document.querySelector('footer').classList.remove('d-none');
+            document.querySelector('header')?.classList.remove('d-none');
+            document.querySelector('footer')?.classList.remove('d-none');
         }
     }, [router.pathname]);
 
     useEffect(() => {
         hideQuick();
         hideVideo();
-        scrollTop = document.querySelector('#scroll-top');
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        scrollTop = document.querySelector('#scroll-top')!;
         window.addEventListener('scroll', scrollHandler, false);
     }, []);
 
@@ -67,7 +68,7 @@ const Layout = ({ children, hideQuick, hideVideo }: LayoutProps) => {
     };
 
     const hideMobileMenu = () => {
-        document.querySelector('body').classList.remove('mmenu-active');
+        document.querySelector('body')!.classList.remove('mmenu-active');
     };
 
     return (
