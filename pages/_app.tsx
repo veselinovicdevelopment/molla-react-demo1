@@ -41,15 +41,15 @@ const WrappedApp = ({ Component, pageProps }: AppContext & AppInitialProps) => {
                 <CookiesProvider>
                     <PersistGate
                         persistor={(store as any).__persistor}
-                        loading={
-                            <div className="loading-overlay">
-                                <div className="bounce-loader">
-                                    <div className="bounce1"></div>
-                                    <div className="bounce2"></div>
-                                    <div className="bounce3"></div>
-                                </div>
-                            </div>
-                        }
+                        // loading={
+                        //     <div className="loading-overlay">
+                        //         <div className="bounce-loader">
+                        //             <div className="bounce1"></div>
+                        //             <div className="bounce2"></div>
+                        //             <div className="bounce3"></div>
+                        //         </div>
+                        //     </div>
+                        // }
                     >
                         <Head>
                             <meta

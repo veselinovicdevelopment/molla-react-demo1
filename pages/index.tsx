@@ -565,4 +565,16 @@ const Home = () => {
     );
 };
 
+export async function getServerSideProps() {
+    const apolloClient = initializeApollo();
+
+    await apolloClient.query({
+        query: GET_HOME_DATA,
+    });
+
+    return addApolloState(apolloClient, {
+        props: {},
+    });
+}
+
 export default Home;

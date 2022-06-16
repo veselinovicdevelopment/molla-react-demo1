@@ -309,21 +309,26 @@ interface SlideToggleProps {
 }
 
 const SlideToggle = ({ title, children }: SlideToggleProps) => {
-    const { getCollapseProps, getToggleProps, isExpanded } = useCollapse({
+    const [isExpanded, setExpanded] = useState(true);
+    const { getCollapseProps, getToggleProps } = useCollapse({
+        isExpanded: isExpanded,
         defaultExpanded: true,
-        isExpanded: true,
     });
+
     return (
         <div className="widget widget-collapsible">
             <h3 className="widget-title mb-2">
                 <a
                     href="#"
                     className={`${isExpanded ? 'expanded' : 'collapsed'}`}
-                    onClick={(e) => {
-                        e.preventDefault();
-                    }}
+                    {...getToggleProps({
+                        onClick: (e) => {
+                            e.preventDefault();
+                            setExpanded(!isExpanded);
+                        },
+                    })}
                 >
-                    <span {...getToggleProps()}>{title}</span>
+                    {title}
                 </a>
             </h3>
             <div {...getCollapseProps()}>{children}</div>

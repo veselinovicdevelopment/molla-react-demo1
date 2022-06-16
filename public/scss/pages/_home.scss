@@ -1,7 +1,7 @@
 /*  Index.html - Home page */
 .slider-container-ratio .intro-slider,
-.slide-image > picture,
-.slide-image > img {
+.slide-image>picture,
+.slide-image>img {
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -9,7 +9,8 @@
 	width: 100%;
 }
 
-.intro-slider-container, .intro-slide .slide-image {
+.intro-slider-container,
+.intro-slide .slide-image {
 	position: relative;
 
 	&:before {
@@ -20,11 +21,11 @@
 }
 
 .intro-content {
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    z-index: 10;
-    transform: translateY(-50%);
+	position: absolute;
+	left: 20px;
+	top: 50%;
+	z-index: 10;
+	transform: translateY(-50%);
 }
 
 .slide-image img {
@@ -61,7 +62,7 @@ button:focus {
 .carousel-with-shadow {
 	&.swiper {
 		padding: 3rem 1rem;
-	    margin: -3rem -1rem;
+		margin: -3rem -1rem;
 	}
 }
 
@@ -88,20 +89,20 @@ button:focus {
 	}
 
 	&::-webkit-scrollbar {
-        width: 7px;
-        height: 20px;
-    }
+		width: 7px;
+		height: 20px;
+	}
 
-    &::-webkit-scrollbar-thumb {
-        background: #ebebeb;
-        border-radius: 10px;
-    }
+	&::-webkit-scrollbar-thumb {
+		background: #ebebeb;
+		border-radius: 10px;
+	}
 
-    &::-webkit-scrollbar-track {
-        background: #fff;
-        border-image: 10px;
-        margin: 8px;
-        width: 100%;
+	&::-webkit-scrollbar-track {
+		background: #fff;
+		border-image: 10px;
+		margin: 8px;
+		width: 100%;
 	}
 }
 
@@ -117,6 +118,7 @@ button:focus {
 .quickView-container,
 .fullscreen-container {
 	position: relative;
+
 	button.mfp-close {
 		font: normal normal 2.6rem/1 'molla';
 		position: absolute;
@@ -137,10 +139,12 @@ button:focus {
 		padding-left: 6rem;
 		padding-right: 6rem;
 	}
+
 	.carousel-dot {
 		padding-left: .5rem;
 		padding-right: .5rem;
 	}
+
 	.quickView-content {
 		padding: 1rem 0 4rem;
 	}
@@ -156,7 +160,7 @@ button:focus {
 
 	.newsletter-img {
 		position: absolute;
-		width: calc( 100% + 1px );
+		width: calc(100% + 1px);
 		max-width: none;
 		height: 100%;
 		object-fit: cover;
@@ -192,10 +196,12 @@ button:focus {
 		margin-bottom: 1rem;
 		text-transform: uppercase;
 		line-height: 1.4em;
+
 		span {
 			color: $primary-color;
 			font-weight: 700;
 		}
+
 		light {
 			font-weight: 400;
 		}
@@ -218,7 +224,7 @@ button:focus {
 
 	.form-control {
 		background-color: #f5f5f5;
-    	border-color: #f5f5f5;
+		border-color: #f5f5f5;
 		border-radius: 0;
 		height: 4.6rem;
 		background-clip: border-box;
@@ -229,12 +235,13 @@ button:focus {
 		}
 
 		&:focus {
-    		border-color: #f5f5f5;
+			border-color: #f5f5f5;
 		}
 	}
 
 	.input-group {
 		border: none;
+
 		.btn {
 			min-width: 7rem;
 			background-color: #222;
@@ -266,7 +273,7 @@ button:focus {
 		letter-spacing: .01em;
 		padding-left: 2rem;
 		position: relative;
-		
+
 		&:before,
 		&:after {
 			left: -.5rem;
@@ -289,10 +296,12 @@ button:focus {
 		top: 1rem;
 		right: 1.5rem;
 		padding: 0;
+
 		font: {
 			family: 'molla';
 			size: 2rem;
 		}
+
 		background-color: #fff;
 		border-radius: 50%;
 		opacity: .6;
@@ -303,12 +312,14 @@ button:focus {
 		&:hover {
 			opacity: 1;
 		}
+
 		&::before {
 			position: relative;
 			content: '\f191';
 			line-height: 1;
 			color: #333;
 		}
+
 		span {
 			display: none;
 		}
@@ -329,14 +340,15 @@ button:focus {
 }
 
 // body 
-@media (-ms-high-contrast: active), (-ms-high-contrast: none) {
+@media (-ms-high-contrast: active),
+(-ms-high-contrast: none) {
 	body {
 		overflow-y: scroll !important;
 	}
 }
 
 @media screen and (min-width: 1200px) {
-	.quickView-content >.row .product-fullscreen {
+	.quickView-content>.row .product-fullscreen {
 		flex: 0 0 calc(50% + 2rem);
 		max-width: calc(50% + 2rem);
 		padding-left: 0;
@@ -354,7 +366,7 @@ button:focus {
 }
 
 @media screen and (max-width: 900px) {
-		
+
 	.fullscreen-container {
 		margin-left: -.6rem;
 		margin-right: -.6rem;
@@ -368,21 +380,22 @@ button:focus {
 	}
 }
 
-@include mq( 'lg' ) {
+@include mq('lg') {
 	.quickView-two {
 		.product-gallery-item {
 			flex: auto;
 		}
-	
+
 		.product-gallery-item {
-			&:before, 
+
+			&:before,
 			&:after {
 				left: 0;
 				right: 0;
 			}
 		}
 	}
-	
+
 	.quickView-container {
 		&.quickView-two {
 			.product-gallery-item {
@@ -399,7 +412,7 @@ button:focus {
 			top: 0;
 			left: auto;
 		}
-	
+
 		.quickview-desc {
 			overflow-y: auto;
 
@@ -407,12 +420,12 @@ button:focus {
 				width: 5px;
 				height: 20px;
 			}
-		
+
 			&::-webkit-scrollbar-thumb {
 				background: #ebebeb;
 				border-radius: 10px;
 			}
-		
+
 			&::-webkit-scrollbar-track {
 				background: #fff;
 				border-image: 10px;
@@ -421,14 +434,15 @@ button:focus {
 			}
 		}
 	}
-	
+
 	.newsletter-popup-container .lazy-load-image-background.lazy-load-image-loaded {
 		display: block !important;
 	}
 }
 
-@include mq( 'lg', 'max' ) {
-	.fullscreen-container .container, 
+@include mq('lg', 'max') {
+
+	.fullscreen-container .container,
 	.container.newsletter-popup-container {
 		max-width: 700px;
 		width: 100%;
@@ -437,7 +451,7 @@ button:focus {
 	#__next {
 		overflow: hidden;
 	}
-	
+
 	.quickView-container.quickView-two {
 		.product-sm {
 			width: auto;
@@ -448,7 +462,7 @@ button:focus {
 		width: 60rem;
 	}
 
-	.quickView-content > .row > div {
+	.quickView-content>.row>div {
 		padding: 0;
 	}
 
@@ -457,7 +471,7 @@ button:focus {
 			margin-top: 3rem;
 		}
 	}
-	
+
 	.quickView-container {
 		height: 96vh;
 	}
@@ -470,12 +484,12 @@ button:focus {
 			width: 5px;
 			height: 20px;
 		}
-	
+
 		&::-webkit-scrollbar-thumb {
 			background: #ebebeb;
 			border-radius: 10px;
 		}
-	
+
 		&::-webkit-scrollbar-track {
 			background: #fff;
 			border-image: 10px;
@@ -485,7 +499,7 @@ button:focus {
 	}
 }
 
-@include mq( 'sm', 'max' ) {
+@include mq('sm', 'max') {
 	.quickView-content {
 		padding: 2.5rem 2rem 1rem;
 	}
@@ -494,7 +508,8 @@ button:focus {
 		padding-bottom: 0;
 	}
 
-	.quickView-container button.mfp-close, .fullscreen-container button.mfp-close {
+	.quickView-container button.mfp-close,
+	.fullscreen-container button.mfp-close {
 		top: 0;
 		right: 1rem;
 	}
@@ -507,7 +522,7 @@ button:focus {
 	}
 }
 
-@include mq( "375px", "max" ) {
+@include mq("375px", "max") {
 	.quickView-content {
 		.btn-wishlist {
 			margin: 0 auto !important;
